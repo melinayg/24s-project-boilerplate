@@ -42,21 +42,61 @@ def get_all_movies():
     except Exception as e:
         return jsonify({"error": "An error occurred fetching the movies."}), 500
 
-# Retrieve a single movie by ID
-@movies_blueprint.route('/movies/<int:movie_id>', methods=['GET'])
-def get_movie(movie_id):
+@movies_blueprint.route('/movies/id/<int:movie_id>', methods=['GET'])
+def get_movie_by_id(movie_id):
     try:
         conn = db.get_db()
         cur = conn.cursor()
         cur.execute('SELECT * FROM Movies WHERE MovieID = %s', (movie_id,))
         movie = cur.fetchone()
 
-        if movie:
-            return jsonify(movie), 200
-        else:
-            return jsonify({"error": "Movie not found."}), 404
+        if not movie:
+            return jsonify({"message": "No movie found with this ID."}), 404
+
+        return jsonify(movie), 200
     except Exception as e:
-        return jsonify({"error": "An error occurred fetching the movie."}), 500
+        return jsonify({"error": "An error occurred fetching the movie: " + str(e)}), 500
+
+
+@movies_blueprint.route('/movies/genre/<string:genre>', methods=['GET'])
+def get_genre_movies(genre):
+    try:
+        conn = db.get_db()
+        cur = conn.cursor()
+        # Use a parameterized query to prevent SQL injection
+        cur.execute('SELECT * FROM Movies WHERE Genre = %s', (genre,))
+        movies = cur.fetchall()
+
+        # If no movies found, return a suitable message
+        if not movies:
+            return jsonify({"message": "No movies found for this genre."}), 404
+
+        return jsonify(movies), 200
+    except Exception as e:
+        return jsonify({"error": "An error occurred fetching the movies: " + str(e)}), 500
+
+
+@movies_blueprint.route('/movies/ratings/<float:rating>', methods=['GET'])
+def get_ratings_movies(rating):
+    try:
+        conn = db.get_db()
+        cur = conn.cursor()
+        # Use a parameterized query to prevent SQL injection
+        # Ensure the rating is a valid decimal within your specified range
+        if not (1 <= rating <= 3):
+            return jsonify({"message": "Rating must be between 1.0 and 3.0"}), 400
+
+        cur.execute('SELECT * FROM Movies WHERE OverallRating = %s', (rating,))
+        movies = cur.fetchall()
+
+        # If no movies found, return a suitable message
+        if not movies:
+            return jsonify({"message": "No movies found for this rating."}), 404
+
+        return jsonify(movies), 200
+    except Exception as e:
+        return jsonify({"error": "An error occurred fetching the movies: " + str(e)}), 500
+
 
 # Update a movie
 @movies_blueprint.route('/movies/<int:movie_id>', methods=['PUT'])
@@ -103,6 +143,39 @@ def delete_movie(movie_id):
         return jsonify({"message": "Movie deleted successfully."}), 200
     except Exception as e:
         return jsonify({"error": "An error occurred deleting the movie."}), 500
+    
+
+@movies_blueprint.route('/movies/price/<string:price_tag>', methods=['GET'])
+def get_movies_by_price(price_tag):
+    try:
+        conn = db.get_db()
+        cur = conn.cursor()
+        # Using LIKE to allow flexibility in searching by price tag patterns
+        cur.execute('SELECT * FROM Movies WHERE PriceTag LIKE %s', ('%' + price_tag + '%',))
+        movies = cur.fetchall()
+
+        if not movies:
+            return jsonify({"message": "No movies found for this price tag."}), 404
+
+        return jsonify(movies), 200
+    except Exception as e:
+        return jsonify({"error": "An error occurred fetching the movies: " + str(e)}), 500
+
+
+@movies_blueprint.route('/movies/theater/<string:location>', methods=['GET'])
+def get_movies_by_theater_location(location):
+    try:
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute('SELECT * FROM Movies WHERE TheaterLocation LIKE %s', ('%' + location + '%',))
+        movies = cur.fetchall()
+
+        if not movies:
+            return jsonify({"message": "No movies found at this theater location."}), 404
+
+        return jsonify(movies), 200
+    except Exception as e:
+        return jsonify({"error": "An error occurred fetching the movies: " + str(e)}), 500
 
 # Register the blueprint in your app configuration
 # app.register_blueprint(movies_blueprint, url_prefix='/api')

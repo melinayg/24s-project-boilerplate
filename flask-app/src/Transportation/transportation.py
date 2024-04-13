@@ -98,5 +98,37 @@ def delete_transportation(transportation_id):
     except Exception as e:
         return jsonify({"error": "An error occurred deleting the transportation record."}), 500
 
+# Retrieve transportation records by type
+@transportation_blueprint.route('/transportation/type/<string:type>', methods=['GET'])
+def get_transportation_by_type(type):
+    try:
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute('SELECT * FROM Transportation WHERE Type = %s', (type,))
+        results = cur.fetchall()
+
+        if not results:
+            return jsonify({"message": "No transportation records found for this type."}), 404
+
+        return jsonify(results), 200
+    except Exception as e:
+        return jsonify({"error": "An error occurred fetching the transportation records: " + str(e)}), 500
+
+# Retrieve transportation records by location
+@transportation_blueprint.route('/transportation/location/<string:location>', methods=['GET'])
+def get_transportation_by_location(location):
+    try:
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute('SELECT * FROM Transportation WHERE Location = %s', (location,))
+        results = cur.fetchall()
+
+        if not results:
+            return jsonify({"message": "No transportation records found for this location."}), 404
+
+        return jsonify(results), 200
+    except Exception as e:
+        return jsonify({"error": "An error occurred fetching the transportation records: " + str(e)}), 500
+
 # Don't forget to register this blueprint in the main application file
 # app.register_blueprint(transportation_blueprint, url_prefix='/api')

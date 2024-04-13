@@ -413,3 +413,5 @@ VALUES ('Downtown Cinema', 'Inception', 8.8, 'Science Fiction', 1);
 
 INSERT INTO Movies (TheaterLocation, Name, OverallRating, Genre, Activity_Type_ID) 
 VALUES ('Riverside Theater', 'The Dark Knight', 9.0, 'Action', 2);
+
+select * from movies;
