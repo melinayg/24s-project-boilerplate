@@ -32,11 +32,12 @@ def create_app():
     # Import the blueprint objects
     from src.Movies.movies import movies_blueprint
     from src.PaymentPlan.payment_plan import payment_plan_blueprint
-    from src.Transportation.customers import transportation_blueprint
+    from src.Transportation.transportation import transportation_blueprint
+    from src.Shopping.shopping import shopping_blueprint
 
     # Register blueprints with the app object and give a url prefix to each
     app.register_blueprint(movies_blueprint, url_prefix='/movies')
     app.register_blueprint(payment_plan_blueprint, url_prefix='/payment_plan')
     app.register_blueprint(transportation_blueprint, url_prefix='/transportation')
-
+    app.register_blueprint(shopping_blueprint, url_prefix='/shopping')
     return app
