@@ -14,8 +14,7 @@ CREATE TABLE User (
     DietaryRestrictions TEXT,
     SubscriptionPlan TEXT,
     PaymentID INT,
-    Paid VARCHAR(255),
-    Free TEXT,
+    Balance INT, 
     PaymentMethod TEXT
 );
 
@@ -29,7 +28,7 @@ CREATE TABLE User_Location (
 
 CREATE TABLE Activity (
     ActivityID INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
-    Name VARCHAR(255) NOT NULL
+    /* category */
 );
 
 CREATE TABLE User_to_Activity(
@@ -58,7 +57,6 @@ CREATE TABLE Interests_Hobbies (
 CREATE TABLE PaymentPlan(
 	PaymentID INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
 	Paid INT,
-	Free INT,
 	PaymentMethod TEXT,
     UserID INT,
     CONSTRAINT fk_4
@@ -157,7 +155,7 @@ CREATE TABLE Restaurants(
 	RestaurantID INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
 	Name TEXT,
 	Reservations INT,
-	CuisineType TEXT,X
+	CuisineType TEXT,
 	PriceTag VARCHAR(5),
 	Location TEXT,
 	ActivityTypeID INT,
@@ -267,7 +265,13 @@ CREATE TABLE Movies (
     FOREIGN KEY (Activity_Type_ID) REFERENCES Activity(ActivityID)
 );
 
-
+CREATE TABLE MoviesLocation (
+    Location VARCHAR(255) PRIMARY KEY UNIQUE,
+    MovieID INT,
+    CONSTRAINT fk_28
+	    FOREIGN KEY (MovieID) REFERENCES Movies(MovieID)
+	    ON UPDATE CASCADE ON DELETE RESTRICT
+);
 
 CREATE TABLE ArtsMuseums (
     ArtMuseumID INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
