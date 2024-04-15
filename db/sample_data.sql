@@ -1,0 +1,5 @@
+
+/* INSERT STATEMENTS */
+
+USE 'GoMass';
+
