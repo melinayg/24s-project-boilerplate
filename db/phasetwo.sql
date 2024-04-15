@@ -12,10 +12,8 @@ CREATE TABLE User (
     Likes TEXT,
     Gender VARCHAR(10),
     DietaryRestrictions TEXT,
-    SubscriptionPlan TEXT,
     PaymentID INT,
-    Paid VARCHAR(255),
-    Free TEXT,
+    Balance INT,
     PaymentMethod TEXT
 );
 
@@ -58,7 +56,6 @@ CREATE TABLE Interests_Hobbies (
 CREATE TABLE PaymentPlan(
 	PaymentID INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
 	Paid INT,
-	Free INT,
 	PaymentMethod TEXT,
     UserID INT,
     CONSTRAINT fk_4
