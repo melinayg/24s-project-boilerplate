@@ -2,13 +2,13 @@ from flask import Blueprint, request, jsonify, make_response
 import json
 from src import db
 
-users = Blueprint('users', __name__)
+user_blueprint = Blueprint('user', __name__)
 
 # Get name and budget from user 
-@users.route('/user', methods=['GET'])
+@user_blueprint.route('/user', methods=['GET'])
 def get_user_info():
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT Name, Budget FROM User')
+    cursor.execute('SELECT * FROM User')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -20,7 +20,7 @@ def get_user_info():
     return the_response
 
 # Get details for specific user by UserID
-@users.route('/user/<int:UserID>', methods=['GET'])
+@user_blueprint.route('/user/<int:UserID>', methods=['GET'])
 def get_user_by_id(UserID):
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM User WHERE UserID = %s', (UserID,))
@@ -35,7 +35,7 @@ def get_user_by_id(UserID):
     return the_response
 
 # Update user information
-@users.route('/user', methods=['PUT'])
+@user_blueprint.route('/user', methods=['PUT'])
 def update_user():
     info = request.json
     UserID = info['UserID']
@@ -67,7 +67,7 @@ def update_user():
     return 'User info is now updated.'
 
 # Delete user's budget from DB by UserID
-@users.route('/user/<int:UserID>/Budget', methods=['DELETE'])
+@user_blueprint.route('/user/<int:UserID>/Budget', methods=['DELETE'])
 def delete_user_budget(UserID):
     cursor = db.get_db().cursor()
     cursor.execute('UPDATE User SET Budget = NULL WHERE UserID = %s', (UserID,))
@@ -75,7 +75,7 @@ def delete_user_budget(UserID):
     return 'User budget deleted.', 200
 
 # Delete user's likes from DB by UserID
-@users.route('/user/<int:UserID>/likes', methods=['DELETE'])
+@user_blueprint.route('/user/<int:UserID>/likes', methods=['DELETE'])
 def delete_user_likes(UserID):
     cursor = db.get_db().cursor()
     cursor.execute('UPDATE User SET Likes = NULL WHERE UserID = %s', (UserID,))
