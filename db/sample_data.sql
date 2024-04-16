@@ -518,3 +518,45 @@ insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (28, 0, 
 insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (29, 1, 'Credit Card', '5');
 insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (30, 0, 'Venmo', '22');
 
+/* Movies */
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (1, 'Galaxy Grandview Cinemas Showcase', 2, 'Science Fiction Drama', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (2, 'Dreamland Dreamplex', 5, 'Techno-Thriller', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (3, 'Cinema Celestial Showcase Lounge Theater', 5, 'Disaster', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (4, 'Movie Magic Multiplex', 1, 'Slasher', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (5, 'Galaxy Heights Theater', 4, 'Teen Comedy', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (6, 'Cinematic Odyssey', 1, 'Political', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (7, 'Regal Cinemacity', 1, 'Spy Comedy', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (8, 'Vista Vista Vista Vista Theaters Lounge Showcase', 3, 'Monster', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (9, 'Cinema Celestial Showcase Lounge Theater', 2, 'Supernatural Drama', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (10, 'Odeon Oasis Theaters', 2, 'Crime', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (11, 'Galaxy Grandview Cinemas Showcase Theater', 3, 'Spy Comedy', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (12, 'Vista Vista Vista Vista Theaters Lounge', 4, 'Medical Drama', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (13, 'Showtime Showcase', 5, 'Mockumentary Comedy', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (14, 'Golden Gate Cinemas', 5, 'Military', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (15, 'Odeon Odyssey Cinemas Lounge Showcase Theater', 5, 'Western Comedy', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (16, 'Starlight Cinematheque', 4, 'Heist', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (17, 'Grandview Cinemas', 2, 'Urban', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (18, 'Dreamland Deluxe Cinemas', 4, 'Psychological Thriller', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (19, 'Golden Gate Cinemas', 1, 'Legal Drama', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (20, 'Starlight Cinematheque', 5, 'Silent', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (21, 'Cinema Celestial Showcase', 3, 'Western', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (22, 'Dreamland Deluxe Movieplex Theater', 5, 'Urban Drama', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (23, 'Harmony Cinematica', 4, 'Musical', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (24, 'Paramount Picture House', 4, 'Romance', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (25, 'Riviera Cinemas', 1, 'Horror', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (26, 'Starlight Stardust Cinema Lounge Showcase', 4, 'Medical Drama', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (27, 'Starlight Cinematheque', 4, 'Military', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (28, 'Galaxy Heights Theater', 3, 'Tragedy', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (29, 'Cinema Celestial Showcase Lounge', 2, 'Fantasy', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (30, 'Vista Vista Vista Theaters', 5, 'Eco-Thriller', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (31, 'Showtime Showcase', 2, 'War Comedy', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (32, 'Harmony Hilltop Theater Lounge Cinema', 2, 'Urban', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (33, 'Velvet Cinema Lounge', 1, 'Satire', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (34, 'Hollywood Heights Theater', 1, 'Buddy Cop', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (35, 'Regal Royale Reel House Cinema', 3, 'Epic', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (36, 'Odeon Oasis Theaters', 3, 'Disaster', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (37, 'Silver Screen Showcase', 5, 'Slasher', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (38, 'Harmony Hill Movie House', 1, 'Teen', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (39, 'Harmony Hilltop Theater', 4, 'Teen Drama', '5');
+insert into Movies (MovieID, Name, OverallRating, Genre, Activity_Type_ID) values (40, 'Empire Movie Palace', 2, 'Science Fiction', '5');
+
