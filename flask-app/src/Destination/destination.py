@@ -4,7 +4,7 @@ from src import db
 destination_blueprint = Blueprint('destination', __name__)
 
 # Create a new destination
-@destination_blueprint.route('/destinations', methods=['POST'])
+@destination_blueprint.route('/destination', methods=['POST'])
 def create_destination():
     data = request.get_json()
     try:
@@ -33,7 +33,7 @@ def create_destination():
         return jsonify({"error": "An error occurred creating the destination."}), 500
 
 # Retrieve all destinations
-@destination_blueprint.route('/destinations', methods=['GET'])
+@destination_blueprint.route('/destination', methods=['GET'])
 def get_all_destinations():
     try:
         conn = db.get_db()
@@ -46,7 +46,7 @@ def get_all_destinations():
         return jsonify({"error": "An error occurred fetching the destinations."}), 500
 
 # Retrieve a single destination by address
-@destination_blueprint.route('/destinations/<string:address>', methods=['GET'])
+@destination_blueprint.route('/destination/<string:address>', methods=['GET'])
 def get_destination(address):
     try:
         conn = db.get_db()
@@ -62,7 +62,7 @@ def get_destination(address):
         return jsonify({"error": "An error occurred fetching the destination: " + str(e)}), 500
 
 # Update a destination
-@destination_blueprint.route('/destinations/<string:address>', methods=['PUT'])
+@destination_blueprint.route('/destination/<string:address>', methods=['PUT'])
 def update_destination(address):
     data = request.get_json()
     try:
@@ -94,7 +94,7 @@ def update_destination(address):
         return jsonify({"error": "An error occurred updating the destination."}), 500
 
 # Delete a destination
-@destination_blueprint.route('/destinations/<string:address>', methods=['DELETE'])
+@destination_blueprint.route('/destination/<string:address>', methods=['DELETE'])
 def delete_destination(address):
     try:
         conn = db.get_db()
