@@ -151,13 +151,13 @@ CREATE TABLE Destination_to_Transportation (
 	    ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+/* 3 */ 
 CREATE TABLE Restaurants(
 	RestaurantID INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
 	Name TEXT,
 	Reservations INT,
 	CuisineType TEXT,
 	PriceTag VARCHAR(5),
-	Location TEXT,
 	ActivityTypeID INT,
 	CONSTRAINT fk_16
 	    FOREIGN KEY (ActivityType) REFERENCES Activity(ActivityID)
@@ -197,7 +197,6 @@ CREATE TABLE MusicFestivals(
 	Name TEXT,
 	MusicType TEXT,
 	CrowdSize INT,
-	Location TEXT,
 	OverallRating INT,
     PriceTag VARCHAR(5),
 	ActivityTypeID INT,
@@ -240,7 +239,6 @@ CREATE TABLE Outdoor_Activity (
     Difficulty_level VARCHAR(255),
     Danger_level VARCHAR(255),
     Experience VARCHAR(255),
-    Location VARCHAR(255),
     PriceTag VARCHAR(5),
     ActivityTypeID INT,
     CONSTRAINT fk_24
@@ -257,7 +255,6 @@ CREATE TABLE Outdoor_Activity_Location (
 
 CREATE TABLE Movies (
     MovieID INT PRIMARY KEY AUTO_INCREMENT,
-    TheaterLocation VARCHAR(255),
     Name VARCHAR(255) NOT NULL,
     OverallRating DECIMAL(3, 1),
     Genre VARCHAR(255),
@@ -280,7 +277,6 @@ CREATE TABLE ArtsMuseums (
     CollegeStudents INT,
     PriceTag VARCHAR(5),
     OverallRating CHAR(5),
-    Location VARCHAR(255),
     ActivityTypeID INT,
     CONSTRAINT fk_26
 	    FOREIGN KEY (ActivityTypeID) REFERENCES Activity(ActivityID)
