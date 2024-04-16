@@ -41,4 +41,5 @@ def create_app():
     app.register_blueprint(transportation_blueprint, url_prefix='/transportation')
     app.register_blueprint(shopping_blueprint, url_prefix='/shopping')
     app.register_blueprint(destination_blueprint, url_prefix='/destination')
+    app.register_blueprint(festivals_blueprint, url_prefix='/festivals')
     return app
