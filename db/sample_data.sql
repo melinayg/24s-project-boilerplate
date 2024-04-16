@@ -485,3 +485,36 @@ insert into Interests_Hobbies (InterestHobbiesID ,  Physical , Art , Music, Cook
 insert into Interests_Hobbies (InterestHobbiesID ,  Physical , Art , Music, Cooking, UserID) values (28, 'skiing', 'Quilting', 'Synth-pop', 'Mediterranean', '15');
 insert into Interests_Hobbies (InterestHobbiesID ,  Physical , Art , Music, Cooking, UserID) values (29, 'Hockey', 'Pottery', 'Indie', 'Italian', '35');
 insert into Interests_Hobbies (InterestHobbiesID ,  Physical , Art , Music, Cooking, UserID) values (30, 'yoga', 'Crocheting', 'Blues', 'Peruvian', '26');
+
+/* payment plan */
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (1, 1, 'Gift Card', '9');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (2, 0, 'Cash', '4');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (3, 0, 'Credit Card', '30');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (4, 0, 'Bitcoin', '3');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (5, 0, 'Bitcoin', '23');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (6, 1, 'PayPal', '7');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (7, 1, 'Cash', '34');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (8, 1, 'Bank Transfer', '32');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (9, 1, 'Cash', '1');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (10, 0, 'PayPal', '27');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (11, 0, 'Apple Pay', '14');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (12, 1, 'Apple Pay', '31');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (13, 0, 'Cash', '29');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (14, 1, 'Credit Card', '10');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (15, 1, 'Venmo', '24');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (16, 1, 'Zelle', '11');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (17, 1, 'Credit Card', '25');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (18, 0, 'Bank Transfer', '15');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (19, 0, 'Apple Pay', '28');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (20, 0, 'Cash', '33');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (21, 1, 'Bitcoin', '26');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (22, 0, 'Bank Transfer', '8');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (23, 1, 'Gift Card', '13');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (24, 1, 'Google Pay', '2');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (25, 1, 'Gift Card', '17');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (26, 1, 'Bank Transfer', '6');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (27, 1, 'Cash', '16');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (28, 0, 'Venmo', '35');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (29, 1, 'Credit Card', '5');
+insert into PaymentPlan (PaymentID, Paid, PaymentMethod, UserID) values (30, 0, 'Venmo', '22');
+
