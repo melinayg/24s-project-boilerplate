@@ -68,10 +68,10 @@ def update_user():
     return 'User info is now updated.'
 
 # Delete user's budget from DB by UserID
-@user_blueprint.route('/user/<int:UserID>/Budget', methods=['DELETE'])
-def delete_user_budget(UserID):
+@user_blueprint.route('/user/<Name>', methods=['DELETE'])
+def delete_user_budget(Name):
     cursor = db.get_db().cursor()
-    cursor.execute('UPDATE User SET Budget = NULL WHERE UserID = %s', (UserID,))
+    cursor.execute('UPDATE User SET Budget = NULL WHERE Name = %s', (Name,))
     db.get_db().commit()
     return 'User budget deleted.', 200
 
