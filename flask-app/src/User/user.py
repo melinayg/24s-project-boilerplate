@@ -35,10 +35,17 @@ def get_user_by_id(UserID):
     the_response.mimetype = 'application/json'
     return the_response
 
-# Update user information
-@user_blueprint.route('/user', methods=['PUT'])
+@user_blueprint.route('/budget', methods=['PUT'])
 def update_user():
     info = request.json
+    required_keys = ['UserID', 'Name', 'Age', 'Occupation', 'Hometown', 'Budget', 'Dislikes', 'Likes', 'Gender', 'DietaryRestrictions', 'SubscriptionPlan', 'PaymentID', 'Balance', 'PaymentMethod']
+
+    # Check if all required keys are in the JSON payload
+    if not all(key in info for key in required_keys):
+        missing_keys = [key for key in required_keys if key not in info]
+        return jsonify({'error': 'Missing keys: {}'.format(missing_keys)}), 400
+
+    # If all keys are present, extract them
     UserID = info['UserID']
     Name = info['Name']
     Age = info['Age']
@@ -54,6 +61,7 @@ def update_user():
     Balance = info['Balance']
     PaymentMethod = info['PaymentMethod']
     
+    # Your SQL query remains the same
     query = '''
         UPDATE User SET Name = %s, Age = %s, Occupation = %s, Hometown = %s, Budget = %s, Dislikes = %s,
         Likes = %s, Gender = %s, DietaryRestrictions = %s, SubscriptionPlan = %s, PaymentID = %s,
@@ -65,7 +73,7 @@ def update_user():
     cursor = db.get_db().cursor()
     cursor.execute(query, data)
     db.get_db().commit()
-    return 'User info is now updated.'
+    return jsonify({'message': 'User info is now updated.'})
 
 # Delete user's budget from DB by UserID
 @user_blueprint.route('/user/<Name>', methods=['DELETE'])
@@ -84,7 +92,7 @@ def delete_user_likes(UserID):
     return 'User likes deleted.', 200
 
 #post new user
-@user_blueprint.route('/users', methods=['POST'])
+@user_blueprint.route('/user', methods=['POST'])
 def create_user():
     data = request.get_json()
     try:
