@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, make_response
 from src import db
 
 movies_blueprint = Blueprint('movies', __name__)
@@ -29,18 +29,20 @@ def create_movie():
     except Exception as e:
         return jsonify({"error": "An error occurred creating the movie."}), 500
 
-# Retrieve all movies
+# Get name and budget from user 
 @movies_blueprint.route('/movies', methods=['GET'])
-def get_all_movies():
-    try:
-        conn = db.get_db()
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM Movies')
-        movies = cur.fetchall()
-
-        return jsonify(movies), 200
-    except Exception as e:
-        return jsonify({"error": "An error occurred fetching the movies."}), 500
+def get_user_info():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM Movies')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
 
 @movies_blueprint.route('/movies/id/<int:movie_id>', methods=['GET'])
 def get_movie_by_id(movie_id):

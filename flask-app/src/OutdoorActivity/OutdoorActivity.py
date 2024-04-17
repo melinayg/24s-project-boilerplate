@@ -34,7 +34,7 @@ def update_outdoor():
 def get_outdoors():
     cursor = db.get_db().cursor()
     cursor.execute('select OutdoorID, Name, Difficulty_level, Danger_level,\
-        Experience, PriceTag, Location, ActivityTypeID from outdoor_activity')
+        Experience, PriceTag, Location, ActivityTypeID from Outdoor_Activity')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()

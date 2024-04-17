@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, make_response
 from src import db
 
 payment_plan_blueprint = Blueprint('payment_plan', __name__)
@@ -27,18 +27,20 @@ def create_payment_plan():
     except Exception as e:
         return jsonify({"error": "An error occurred creating the payment plan."}), 500
 
-# Retrieve all payment plans
+# Get name and budget from user 
 @payment_plan_blueprint.route('/payment_plan', methods=['GET'])
-def get_all_payment_plans():
-    try:
-        conn = db.get_db()
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM PaymentPlan')
-        payment_plans = cur.fetchall()
-
-        return jsonify(payment_plans), 200
-    except Exception as e:
-        return jsonify({"error": "An error occurred fetching the payment plans."}), 500
+def get_payment_plan_info():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM PaymentPlan')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
 
 # Retrieve a single payment plan
 @payment_plan_blueprint.route('/payment_plan/<int:payment_id>', methods=['GET'])
