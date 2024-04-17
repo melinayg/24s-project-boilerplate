@@ -31,18 +31,20 @@ def create_group_activity():
         return jsonify({"error": "An error occurred creating the group_activity."}), 500
 
 
-# Retrieve all group_activity possibl
+# Get name and budget from group 
 @groupact_blueprint.route('/group_activity', methods=['GET'])
-def get_all_groupact():
-    try:
-        conn = db.get_db()
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM group_activity')
-        group_activity = cur.fetchall()
-
-        return jsonify(group_activity), 200
-    except Exception as e:
-        return jsonify({"error": "An error occurred fetching the group_activity."}), 500
+def get_groupact_info():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM GroupAct')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
 
 # Retrieve a single group_activity
 @groupact_blueprint.route('/group_activity/<int:group_activity_id>', methods=['GET'])

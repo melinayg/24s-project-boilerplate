@@ -31,7 +31,7 @@ def create_movie():
 
 # Get name and budget from user 
 @movies_blueprint.route('/movies', methods=['GET'])
-def get_user_info():
+def get_movies_info():
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM Movies')
     row_headers = [x[0] for x in cursor.description]

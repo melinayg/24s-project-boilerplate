@@ -21,19 +21,17 @@ def update_restaurant():
     location = info['Location']
     activity = info['ActivityType']
 
-    query = 'UPDATE restaurants SET Name = %s, Reservations = %s, CuisineType = %s, PriceTag= %s, Location = %s, ActivityType = %s where RestaurantID = %s'
+    query = 'UPDATE Restaurants SET Name = %s, Reservations = %s, CuisineType = %s, PriceTag= %s, Location = %s, ActivityType = %s where RestaurantID = %s'
     data = (name, reservations, cuisine, price,location, activity, rest_id)
     cursor = db.get_db().cursor()
     x = cursor.execute(query, data)
     db.get_db().commit()
     return 'Restaurant info updated.'
 
-# Get all restaurants from the DB
 @restaurants_blueprint.route('/restaurants', methods=['GET'])
-def get_restaurants():
+def get_restaurants_info():
     cursor = db.get_db().cursor()
-    cursor.execute('select RestaurantID, Name, Reservations, CuisineType,\
-        PriceTag, Location, ActivityType from restaurants')
+    cursor.execute('SELECT * FROM Restaurants')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -48,7 +46,7 @@ def get_restaurants():
 @restaurants_blueprint.route('/restaurants/<RestaurantID>', methods=['GET'])
 def get_restaurant(userID):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from restaurants where id = {0}'.format(userID))
+    cursor.execute('select * from Restaurants where id = {0}'.format(userID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -76,7 +74,7 @@ def add_new_restaurant():
     activity = the_data['ActivityType']
 
     # constructing the query
-    query = 'INSERT INTO restaurants (Name, Reservations, CuisineType, PriceTag, Location, ActivityType) VALUES (%s, %s, %s, %s, %s, %s)'
+    query = 'INSERT INTO Restaurants (Name, Reservations, CuisineType, PriceTag, Location, ActivityType) VALUES (%s, %s, %s, %s, %s, %s)'
     data = (name, reservations, cuisine, price, location, activity)
     current_app.logger.info(query)
     
@@ -92,7 +90,7 @@ def add_new_restaurant():
 @restaurants_blueprint.route('/restaurants/<RestaurantID>', methods=['DELETE'])
 def delete_user(RestaurantID):
     cursor = db.get_db().cursor()
-    cursor.execute('DELETE FROM restaurants WHERE RestaurantID = %s', (RestaurantID,))
+    cursor.execute('DELETE FROM Restaurants WHERE RestaurantID = %s', (RestaurantID,))
     db.get_db().commit()
     return 'Restaurant deleted.', 200
 
@@ -100,7 +98,7 @@ def delete_user(RestaurantID):
 @restaurants_blueprint.route('/restaurants/<CuisineType>', methods=['GET'])
 def get_restaurants_by_cuisine(cuisine_type):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM restaurants WHERE CuisineType = %s', (cuisine_type,))
+    cursor.execute('SELECT * FROM Restaurants WHERE CuisineType = %s', (cuisine_type,))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()

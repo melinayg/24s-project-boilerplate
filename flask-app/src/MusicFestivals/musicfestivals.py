@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, make_response
 from src import db
 
 festivals_blueprint = Blueprint('festivals', __name__)
@@ -32,16 +32,18 @@ def create_festival():
 
 # Retrieve all festivals
 @festivals_blueprint.route('/festivals', methods=['GET'])
-def get_all_festivals():
-    try:
-        conn = db.get_db()
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM MusicFestivals')
-        festivals = cur.fetchall()
-
-        return jsonify(festivals), 200
-    except Exception as e:
-        return jsonify({"error": "An error occurred fetching the festivals."}), 500
+def get_user_info():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM MusicFestivals')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
 
 # Retrieve a single festival by ID
 @festivals_blueprint.route('/festivals/<int:festival_id>', methods=['GET'])

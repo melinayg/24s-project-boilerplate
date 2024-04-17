@@ -6,7 +6,6 @@ from flask import Blueprint, request, jsonify, make_response
 import json
 from src import db
 
-
 hobbies_blueprint = Blueprint('hobbies', __name__)
 
 # would we have to create fake hobby data thru code or mockaroo
@@ -22,7 +21,7 @@ def create_hobbies():
 
         conn = db.get_db()
         cur = conn.cursor()
-        cur.execute('INSERT INTO hobbies (physical, art, cooking, music, hobby_id) VALUES (%s, %s, %s, %s, %s)', 
+        cur.execute('INSERT INTO Interests_Hobbies (physical, art, cooking, music, hobby_id) VALUES (%s, %s, %s, %s, %s)', 
                     (physical, art, cooking, music, hobby_id)
                 )
         conn.commit()
@@ -35,18 +34,21 @@ def create_hobbies():
         return jsonify({"error": "An error occurred creating the hobby."}), 500
 
 
-# Retrieve all hobbies
+# Get name and budget from user 
 @hobbies_blueprint.route('/hobbies', methods=['GET'])
-def get_all_hobbies():
-    try:
-        conn = db.get_db()
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM hobbies')
-        hobbies = cur.fetchall()
+def get_hobbies_info():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM Interests_Hobbies')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
 
-        return jsonify(hobbies), 200
-    except Exception as e:
-        return jsonify({"error": "An error occurred fetching the hobbies."}), 500
 
 # Retrieve a single hobby
 @hobbies_blueprint.route('/hobbies/<int:hobby_id>', methods=['GET'])
@@ -54,7 +56,7 @@ def get_hobby(hobby_id):
     try:
         conn = db.get_db()
         cur = conn.cursor()
-        cur.execute('SELECT * FROM hobbies WHERE hobby_id = %s', (hobby_id))
+        cur.execute('SELECT * FROM Interests_Hobbies WHERE hobby_id = %s', (hobby_id))
         hobby = cur.fetchone()
 
         if hobby:
@@ -85,7 +87,7 @@ def create_hobbies():
             placeholders += ', %s'
             values += (new_hobby,)
 
-        query = f'INSERT INTO hobbies ({columns}, hobby_id) VALUES ({placeholders}, %s)'
+        query = f'INSERT INTO Interests_Hobbies ({columns}, hobby_id) VALUES ({placeholders}, %s)'
         cur.execute(query, values + (hobby_id,))  # Executes the SQL query with values and hobbies_id
         conn.commit()
 
@@ -102,7 +104,7 @@ def delete_hobby(hobby_id):
     try:
         conn = db.get_db()
         cur = conn.cursor()
-        cur.execute('DELETE FROM hobbies WHERE hobby_id = %s', (hobby_id,))
+        cur.execute('DELETE FROM Interests_Hobbies WHERE hobby_id = %s', (hobby_id,))
         conn.commit()
 
         if cur.rowcount == 0:
@@ -123,7 +125,7 @@ def update_customer():
         music = data['music']
         hobby_id = data['hobby_id']
 
-        query = 'UPDATE hobbies SET physical = %s, art = %s, cooking = %s, music = %s WHERE hobby_id = %s'
+        query = 'UPDATE Interests_Hobbies SET physical = %s, art = %s, cooking = %s, music = %s WHERE hobby_id = %s'
         data = (physical, art, cooking, music, hobby_id)
 
         cursor = db.get_db().cursor()

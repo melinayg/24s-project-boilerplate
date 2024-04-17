@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, make_response
 from src import db
 
 destination_blueprint = Blueprint('destination', __name__)
@@ -32,18 +32,20 @@ def create_destination():
     except Exception as e:
         return jsonify({"error": "An error occurred creating the destination."}), 500
 
-# Retrieve all destinations
+# Get name and budget from cafe 
 @destination_blueprint.route('/destination', methods=['GET'])
-def get_all_destinations():
-    try:
-        conn = db.get_db()
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM Destination')
-        destinations = cur.fetchall()
-
-        return jsonify(destinations), 200
-    except Exception as e:
-        return jsonify({"error": "An error occurred fetching the destinations."}), 500
+def get_destination_info():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM Destination')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
 
 # Retrieve a single destination by address
 @destination_blueprint.route('/destination/<string:address>', methods=['GET'])

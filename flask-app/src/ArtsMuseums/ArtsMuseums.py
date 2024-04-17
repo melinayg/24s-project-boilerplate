@@ -29,12 +29,11 @@ def update_art():
     db.get_db().commit()
     return 'Art info updated.'
 
-# Get all art and museums from the DB
+# Get name and budget from user 
 @art_blueprint.route('/art', methods=['GET'])
-def get_arts():
+def get_art_info():
     cursor = db.get_db().cursor()
-    cursor.execute('select ArtMuseumID, Name, ArtType, CollegeStudents,\
-        OverallRating, PriceTag, Location, ActivityTypeID from artmuseums')
+    cursor.execute('SELECT * FROM ArtsMuseums')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
