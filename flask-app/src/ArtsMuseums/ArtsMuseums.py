@@ -7,10 +7,10 @@ import json
 from src import db
 
 
-art = Blueprint('art', __name__)
+art_blueprint = Blueprint('art', __name__)
 
 # Update art activity information 
-@art.route('/art', methods=['PUT'])
+@art_blueprint.route('/art', methods=['PUT'])
 def update_art():
     info = request.json
     id = info['ArtMuseumID']
@@ -30,7 +30,7 @@ def update_art():
     return 'Art info updated.'
 
 # Get all art and museums from the DB
-@art.route('/art', methods=['GET'])
+@art_blueprint.route('/art', methods=['GET'])
 def get_arts():
     cursor = db.get_db().cursor()
     cursor.execute('select ArtMuseumID, Name, ArtType, CollegeStudents,\
@@ -46,7 +46,7 @@ def get_arts():
     return the_response
 
 # Get details for specific art/museum activity
-@art.route('/art/<ArtMuseumID>', methods=['GET'])
+@art_blueprint.route('/art/<ArtMuseumID>', methods=['GET'])
 def get_art(ArtMuseumID):
     cursor = db.get_db().cursor()
     cursor.execute('select * from art where id = {0}'.format(ArtMuseumID))
@@ -61,7 +61,7 @@ def get_art(ArtMuseumID):
     return the_response
 
 # Input new art/museum
-@art.route('/art', methods=['POST'])
+@art_blueprint.route('/art', methods=['POST'])
 def add_new_art():
 
     # collecting data from the request object 
@@ -90,7 +90,7 @@ def add_new_art():
     return 'Art added successfully.'
 
 # Delete art/museum from DB
-@art.route('/art/<ArtMuseumID>', methods=['DELETE'])
+@art_blueprint.route('/art/<ArtMuseumID>', methods=['DELETE'])
 def delete_user(ArtMuseumID):
     cursor = db.get_db().cursor()
     cursor.execute('DELETE FROM artmuseums WHERE ArtMuseumID = %s', (ArtMuseumID,))
@@ -98,7 +98,7 @@ def delete_user(ArtMuseumID):
     return 'Art deleted.', 200
 
 # Get arts museums by art type
-@art.route('/art/<art_type>', methods=['GET'])
+@art_blueprint.route('/art/<art_type>', methods=['GET'])
 def get_arts_museums_by_art_type(art_type):
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM ArtsMuseums WHERE ArtType = %s', (art_type,))
