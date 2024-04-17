@@ -24,7 +24,6 @@ def get_user_info():
 @user_blueprint.route('/user/<UserID>', methods=['GET'])
 def get_user_by_id(UserID):
     cursor = db.get_db().cursor()
-    print("checking to see")
     cursor.execute('SELECT * FROM User WHERE UserID = %s', (UserID,))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -83,24 +82,25 @@ def delete_user_likes(UserID):
     cursor.execute('UPDATE User SET Likes = NULL WHERE UserID = %s', (UserID,))
     db.get_db().commit()
     return 'User likes deleted.', 200
+
 #post new user
 @app.route('/users', methods=['POST'])
 def create_user():
     data = request.get_json()
     try:
-        name = data['Name']
-        age = data['Age']
-        occupation = data['Occupation']
-        hometown = data['Hometown']
-        budget = data['Budget']
-        dislikes = data['Dislikes']
-        likes = data['Likes']
-        gender = data['Gender']
-        dietary_restrictions = data['Dietary_restrictions']
-        subscription_plan = data['Subscription_plan']
-        payment_id = data['Payment_id']
+        Name = data['Name']
+        Age = data['Age']
+        Occupation = data['Occupation']
+        Hometown = data['Hometown']
+        Budget = data['Budget']
+        Dislikes = data['Dislikes']
+        Likes = data['Likes']
+        Gender = data['Gender']
+        DietaryRestrictions = data['DietaryRestrictions']
+        SubscriptionPlan = data['SubscriptionPlan']
+        PaymentID = data['PaymentId']
         Balance = data['Balance']
-        payment_method = data['Payment_method']
+        PaymentMethod = data['PaymentMethod']
 
         cursor = db.cursor()
 
@@ -109,7 +109,7 @@ def create_user():
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         '''
 
-        cursor.execute(query, (name, age, occupation, hometown, budget, dislikes, likes, gender, dietary_restrictions, subscription_plan, payment_id, Balance, payment_method))
+        cursor.execute(query, (Name, Age, Occupation, Hometown, Budget, Dislikes, Likes, Gender, DietaryRestrictions, SubscriptionPlan, PaymentID, Balance, PaymentMethod))
         db.commit()
 
         return jsonify({"message": "User created successfully."}), 201
