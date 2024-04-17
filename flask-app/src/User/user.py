@@ -5,6 +5,7 @@ from src import db
 user_blueprint = Blueprint('user', __name__)
 
 # Get name and budget from user 
+
 @user_blueprint.route('/user', methods=['GET'])
 def get_user_info():
     cursor = db.get_db().cursor()
@@ -19,10 +20,11 @@ def get_user_info():
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get details for specific user by UserID
-@user_blueprint.route('/user/<int:UserID>', methods=['GET'])
+#Get details for specific user by UserID
+@user_blueprint.route('/user/<UserID>', methods=['GET'])
 def get_user_by_id(UserID):
     cursor = db.get_db().cursor()
+    print("checking to see")
     cursor.execute('SELECT * FROM User WHERE UserID = %s', (UserID,))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -50,16 +52,16 @@ def update_user():
     DietaryRestrictions = info['DietaryRestrictions']
     SubscriptionPlan = info['SubscriptionPlan']
     PaymentID = info['PaymentID']
-    Paid_Free = info['Paid/Free']
+    Balance = info['Balance']
     PaymentMethod = info['PaymentMethod']
     
     query = '''
         UPDATE User SET Name = %s, Age = %s, Occupation = %s, Hometown = %s, Budget = %s, Dislikes = %s,
         Likes = %s, Gender = %s, DietaryRestrictions = %s, SubscriptionPlan = %s, PaymentID = %s,
-        Paid_Free = %s, PaymentMethod = %s WHERE UserID = %s
+        Balance = %s, PaymentMethod = %s WHERE UserID = %s
     '''
     data = (Name, Age, Occupation, Hometown, Budget, Dislikes, Likes, Gender, DietaryRestrictions,
-            SubscriptionPlan, PaymentID, Paid_Free, PaymentMethod, UserID)
+            SubscriptionPlan, PaymentID, Balance, PaymentMethod, UserID)
     
     cursor = db.get_db().cursor()
     cursor.execute(query, data)
@@ -81,3 +83,38 @@ def delete_user_likes(UserID):
     cursor.execute('UPDATE User SET Likes = NULL WHERE UserID = %s', (UserID,))
     db.get_db().commit()
     return 'User likes deleted.', 200
+#post new user
+@app.route('/users', methods=['POST'])
+def create_user():
+    data = request.get_json()
+    try:
+        name = data['Name']
+        age = data['Age']
+        occupation = data['Occupation']
+        hometown = data['Hometown']
+        budget = data['Budget']
+        dislikes = data['Dislikes']
+        likes = data['Likes']
+        gender = data['Gender']
+        dietary_restrictions = data['Dietary_restrictions']
+        subscription_plan = data['Subscription_plan']
+        payment_id = data['Payment_id']
+        Balance = data['Balance']
+        payment_method = data['Payment_method']
+
+        cursor = db.cursor()
+
+        query = '''
+            INSERT INTO User (Name, Age, Occupation, Hometown, Budget, Dislikes, Likes, Gender, DietaryRestrictions, SubscriptionPlan, PaymentID, Balance, PaymentMethod) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        '''
+
+        cursor.execute(query, (name, age, occupation, hometown, budget, dislikes, likes, gender, dietary_restrictions, subscription_plan, payment_id, Balance, payment_method))
+        db.commit()
+
+        return jsonify({"message": "User created successfully."}), 201
+
+    except KeyError as e:
+        return jsonify({"error": f"Missing field: {e}"}), 400
+    except Exception as e:
+        return jsonify({"error": "An error occurred creating the user."}), 500

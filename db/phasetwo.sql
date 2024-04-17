@@ -201,6 +201,7 @@ CREATE TABLE MusicFestivals(
 	CrowdSize INT,
 	OverallRating INT,
     PriceTag VARCHAR(5),
+    Artists VARCHAR(255),
 	ActivityTypeID INT,
 	CONSTRAINT fk_20
 	    FOREIGN KEY (ActivityTypeID) REFERENCES Activity(ActivityID)
