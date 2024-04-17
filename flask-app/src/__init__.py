@@ -51,56 +51,15 @@ def create_app():
     app.register_blueprint(payment_plan_blueprint, url_prefix='/payment_plan')
     app.register_blueprint(transportation_blueprint, url_prefix='/transportation')
     app.register_blueprint(shopping_blueprint, url_prefix='/shopping')
-<<<<<<< HEAD
-    app.register_blueprint(user_blueprint,   url_prefix='/user')
-    app.register_blueprint(art_blueprint,   url_prefix='/art')
-    app.register_blueprint(cafes_blueprint, url_prefix='/cafes')
-    app.register_blueprint(destination_blueprint, url_prefix='/destination')
-    app.register_blueprint(groupact_blueprint, url_prefix='/group_activity')
-=======
     app.register_blueprint(user_blueprint, url_prefix='/user')
-    app.register_blueprint(hobbies_blueprint, url_prefix='/hobbies')
     app.register_blueprint(art_blueprint, url_prefix = '/art')
     app.register_blueprint(cafes_blueprint, url_prefix = '/cafes')
     app.register_blueprint(destination_blueprint, url_prefix = '/destination')
     app.register_blueprint(groupact_blueprint, url_prefix = '/group_activity')
->>>>>>> origin/main
     app.register_blueprint(festivals_blueprint, url_prefix = '/festivals')
     app.register_blueprint(restaurants_blueprint, url_prefix = '/restaurants')
 
 
     return app
 
-# # Import the blueprint objects 
-#     from src.Movies.movies import movies_blueprint
-#     from src.PaymentPlan.payment_plan import payment_plan_blueprint
-#     from src.Transportation.transportation import transportation_blueprint
-#     from src.Shopping.shopping import shopping_blueprint
-#     from src.User.user import user_blueprint 
-#     from src.OutdoorActivity.OutdoorActivity import outdoor_blueprint
-#     from src.InterestsHobbies.interestshobbies import hobbies_blueprint
-#     from src.ArtsMuseums.ArtsMuseums import art_blueprint
-#     from src.Cafes.cafe import cafes_blueprint
-#     from src.Destination.destination import destination_blueprint
-#     from src.GroupActivity.groupactivity import groupact_blueprint
-#     from src.MusicFestivals.musicfestivals import festivals_blueprint
-#     from src.Restaurants.restaurants import restaurants_blueprint
-
-
-#     # Register blueprints with the app object and give a url prefix to each
-#     app.register_blueprint(movies_blueprint, url_prefix='/movies')
-#     app.register_blueprint(payment_plan_blueprint, url_prefix='/payment_plan')
-#     app.register_blueprint(outdoor_blueprint, url_prefix='/outdoor')
-#     app.register_blueprint(transportation_blueprint, url_prefix='/transportation')
-#     app.register_blueprint(shopping_blueprint, url_prefix='/shopping')
-#     app.register_blueprint(user_blueprint, url_prefix='/user')
-#     app.register_blueprint(hobbies_blueprint, url_prefix='/hobbies')
-#     app.register_blueprint(art_blueprint, url_prefix = '/art')
-#     app.register_blueprint(cafes_blueprint, url_prefix = '/cafes')
-#     app.register_blueprint(destination_blueprint, url_prefix = '/destination')
-#     app.register_blueprint(groupact_blueprint, url_prefix = '/group_activity')
-#     app.register_blueprint(festivals_blueprint, url_prefix = '/festivals')
-#     app.register_blueprint(restaurants_blueprint, url_prefix = '/restaurants')
-
-#     return app
 
