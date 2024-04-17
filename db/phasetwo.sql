@@ -99,8 +99,7 @@ CREATE TABLE Destination (
     City VARCHAR(255),
     State VARCHAR(255),
     Distance VARCHAR(255),
-    Proximity ENUM('long', 'med', 'short'),
-    WeatherRecommendations TEXT
+    Proximity ENUM('long', 'med', 'short')
 );
 
 CREATE TABLE Destination_location (
@@ -208,6 +207,7 @@ CREATE TABLE MusicFestivals(
 	Location TEXT,
 	OverallRating INT,
     PriceTag VARCHAR(5),
+    Artists VARCHAR(255),
 	ActivityTypeID INT,
 	CONSTRAINT fk_20
 	    FOREIGN KEY (ActivityTypeID) REFERENCES Activity(ActivityID)
