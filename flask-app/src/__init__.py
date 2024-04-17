@@ -54,9 +54,9 @@ def create_app():
     app.register_blueprint(user_blueprint, url_prefix='/user')
     app.register_blueprint(hobbies_blueprint, url_prefix='/hobbies')
     app.register_blueprint(art_blueprint, url_prefix = '/art')
-    app.register_blueprint(cafes_blueprint, url_prefix = '/cafe')
+    app.register_blueprint(cafes_blueprint, url_prefix = '/cafes')
     app.register_blueprint(destination_blueprint, url_prefix = '/destination')
-    app.register_blueprint(groupact_blueprint, url_prefix = '/groupact')
+    app.register_blueprint(groupact_blueprint, url_prefix = '/group_activity')
     app.register_blueprint(festivals_blueprint, url_prefix = '/festivals')
     app.register_blueprint(restaurants_blueprint, url_prefix = '/restaurants')
 
