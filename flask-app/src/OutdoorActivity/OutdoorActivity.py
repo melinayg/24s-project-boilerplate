@@ -7,10 +7,10 @@ import json
 from src import db
 
 
-outdoor = Blueprint('outdoor', __name__)
+outdoor_blueprint = Blueprint('outdoor', __name__)
 
 # Update outdoor activity information 
-@outdoor.route('/outdoor', methods=['PUT'])
+@outdoor_blueprint.route('/outdoor', methods=['PUT'])
 def update_outdoor():
     info = request.json
     id = info['OutdoorID']
@@ -30,7 +30,7 @@ def update_outdoor():
     return 'Outdoor info updated.'
 
 # Get all outdoors from the DB
-@outdoor.route('/outdoor', methods=['GET'])
+@outdoor_blueprint.route('/outdoor', methods=['GET'])
 def get_outdoors():
     cursor = db.get_db().cursor()
     cursor.execute('select OutdoorID, Name, Difficulty_level, Danger_level,\
@@ -46,7 +46,7 @@ def get_outdoors():
     return the_response
 
 # Get outdoor detail for specific activity
-@outdoor.route('/outdoor/<OutdoorID>', methods=['GET'])
+@outdoor_blueprint.route('/outdoor/<OutdoorID>', methods=['GET'])
 def get_outdoor(OutdoorID):
     cursor = db.get_db().cursor()
     cursor.execute('select * from outdoor where id = {0}'.format(OutdoorID))
@@ -61,7 +61,7 @@ def get_outdoor(OutdoorID):
     return the_response
 
 # Input new outdoor
-@outdoor.route('/outdoor', methods=['POST'])
+@outdoor_blueprint.route('/outdoor', methods=['POST'])
 def add_new_outdoor():
 
     # collecting data from the request object 
@@ -90,7 +90,7 @@ def add_new_outdoor():
     return 'Outdoor added successfully.'
 
 # Delete outdoor from DB
-@outdoor.route('/outdoor/<OutdoorID>', methods=['DELETE'])
+@outdoor_blueprint.route('/outdoor/<OutdoorID>', methods=['DELETE'])
 def delete_user(OutdoorID):
     cursor = db.get_db().cursor()
     cursor.execute('DELETE FROM outdoor_activity WHERE OutdoorID = %s', (OutdoorID,))
@@ -98,7 +98,7 @@ def delete_user(OutdoorID):
     return 'Outdoor deleted.', 200
 
 # Get outdoors by difficulty_level
-@outdoor.route('/outdoor/<Difficulty_level>', methods=['GET'])
+@outdoor_blueprint.route('/outdoor/<Difficulty_level>', methods=['GET'])
 def get_outdoors_by_cuisine(difficulty):
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM outdoor_activity WHERE Difficulty_level = %s', (difficulty,))

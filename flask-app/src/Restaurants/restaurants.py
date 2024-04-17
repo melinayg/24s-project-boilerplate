@@ -7,10 +7,10 @@ import json
 from src import db
 
 
-restaurants = Blueprint('restaurants', __name__)
+restaurants_blueprint = Blueprint('restaurants', __name__)
 
 # Update User information for user
-@restaurants.route('/restaurants', methods=['PUT'])
+@restaurants_blueprint.route('/restaurants', methods=['PUT'])
 def update_restaurant():
     info = request.json
     rest_id = info['RestaurantID']
@@ -29,7 +29,7 @@ def update_restaurant():
     return 'Restaurant info updated.'
 
 # Get all restaurants from the DB
-@restaurants.route('/restaurants', methods=['GET'])
+@restaurants_blueprint.route('/restaurants', methods=['GET'])
 def get_restaurants():
     cursor = db.get_db().cursor()
     cursor.execute('select RestaurantID, Name, Reservations, CuisineType,\
@@ -45,7 +45,7 @@ def get_restaurants():
     return the_response
 
 # Get restaurant detail for customer with particular userID
-@restaurants.route('/restaurants/<RestaurantID>', methods=['GET'])
+@restaurants_blueprint.route('/restaurants/<RestaurantID>', methods=['GET'])
 def get_restaurant(userID):
     cursor = db.get_db().cursor()
     cursor.execute('select * from restaurants where id = {0}'.format(userID))
@@ -60,7 +60,7 @@ def get_restaurant(userID):
     return the_response
 
 # Input new restaurant
-@restaurants.route('/restaurants', methods=['POST'])
+@restaurants_blueprint.route('/restaurants', methods=['POST'])
 def add_new_restaurant():
 
     # collecting data from the request object 
@@ -89,7 +89,7 @@ def add_new_restaurant():
 
 
 # Delete restaurant from DB
-@restaurants.route('/restaurants/<RestaurantID>', methods=['DELETE'])
+@restaurants_blueprint.route('/restaurants/<RestaurantID>', methods=['DELETE'])
 def delete_user(RestaurantID):
     cursor = db.get_db().cursor()
     cursor.execute('DELETE FROM restaurants WHERE RestaurantID = %s', (RestaurantID,))
@@ -97,7 +97,7 @@ def delete_user(RestaurantID):
     return 'Restaurant deleted.', 200
 
 # Get restaurants by cuisine type
-@restaurants.route('/restaurants/<CuisineType>', methods=['GET'])
+@restaurants_blueprint.route('/restaurants/<CuisineType>', methods=['GET'])
 def get_restaurants_by_cuisine(cuisine_type):
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM restaurants WHERE CuisineType = %s', (cuisine_type,))

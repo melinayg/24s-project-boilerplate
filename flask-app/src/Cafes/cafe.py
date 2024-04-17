@@ -2,10 +2,10 @@ from flask import Blueprint, request, jsonify, make_response
 import json
 from src import db
 
-cafes = Blueprint('cafes', __name__)
+cafes_blueprint = Blueprint('cafes', __name__)
 
 # Update cafe information
-@cafes.route('/cafes', methods=['PUT'])
+@cafes_blueprint.route('/cafes', methods=['PUT'])
 def update_cafes():
     info = request.json
     id = info['CafeID']
@@ -24,7 +24,7 @@ def update_cafes():
     return 'Cafes info is now updated.'
 
 # Retrieve cafe pricing
-@cafes.route('/cafes/price/<price_tag>', methods=['GET'])
+@cafes_blueprint.route('/cafes/price/<price_tag>', methods=['GET'])
 def cafe_price(price_tag):
     try:
         conn = db.get_db()
@@ -40,7 +40,7 @@ def cafe_price(price_tag):
         return jsonify({"error": "An error occurred."}), 500
 
 # Delete a rating for a cafe
-@cafes.route('/cafes/<int:cafe_id>/rating', methods=['DELETE'])
+@cafes_blueprint.route('/cafes/<int:cafe_id>/rating', methods=['DELETE'])
 def delete_cafe_rating(cafe_id):
     try:
         conn = db.get_db()
@@ -56,7 +56,7 @@ def delete_cafe_rating(cafe_id):
         return jsonify({"error": "An error occurred deleting the cafe rating."}), 500
 
 # posts cafe
-@cafes.route('/cafes', methods=['POST'])
+@cafes_blueprint.route('/cafes', methods=['POST'])
 def create_cafe():
     data = request.get_json()
     try:
@@ -83,7 +83,7 @@ def create_cafe():
         return jsonify({"error": "An error occurred while creating the cafe."}), 500
 
 # Retrieve by cuisine
-@cafes.route('/cafes/cuisine/<cuisine>', methods=['GET'])
+@cafes_blueprint.route('/cafes/cuisine/<cuisine>', methods=['GET'])
 def get_cafes_by_cuisine(cuisine):
     try:
         conn = db.get_db()
@@ -99,7 +99,7 @@ def get_cafes_by_cuisine(cuisine):
         return jsonify({"error": "An error occurred fetching cafes by cuisine."}), 500
     
 # delete cafe id 
-@cafes.route('/cafes/<int:cafe_id>', methods=['DELETE'])
+@cafes_blueprint.route('/cafes/<int:cafe_id>', methods=['DELETE'])
 def delete_cafe(cafe_id):
     try:
         conn = db.get_db()
