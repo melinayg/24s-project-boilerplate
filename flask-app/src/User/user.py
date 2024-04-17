@@ -84,7 +84,7 @@ def delete_user_likes(UserID):
     return 'User likes deleted.', 200
 
 #post new user
-@app.route('/users', methods=['POST'])
+@user_blueprint.route('/users', methods=['POST'])
 def create_user():
     data = request.get_json()
     try:
