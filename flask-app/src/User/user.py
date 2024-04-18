@@ -42,10 +42,10 @@ def delete_user(UserID):
 
 
 #Get details for specific user by UserID
-@user_blueprint.route('/user/<Name>', methods=['GET'])
-def get_name_by_id(Name):
+@user_blueprint.route('/user/<int:UserID>', methods=['GET'])
+def get_name_by_id(UserID):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM User WHERE Name = %s', (Name,))
+    cursor.execute('SELECT * FROM User WHERE UserID = %s', (UserID,))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
