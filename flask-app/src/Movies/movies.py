@@ -8,19 +8,18 @@ movies_blueprint = Blueprint('movies', __name__)
 def create_movie():
     data = request.get_json()
     try:
-        theater_location = data['theater_location']
-        name = data['name']
-        overall_rating = data['overall_rating']
-        genre = data['genre']
-        activity_type_id = data['activity_type_id']
+        name = data['Name']
+        overall_rating = data['OverallRating']
+        genre = data['Genre']
+        activity_type_id = data['Activity_Type_ID']
 
         query = '''
-            INSERT INTO Movies (TheaterLocation, Name, OverallRating, Genre, Activity_Type_ID) 
+            INSERT INTO Movies (Name, OverallRating, Genre, Activity_Type_ID) 
             VALUES (%s, %s, %s, %s, %s)
         '''
         conn = db.get_db()
         cur = conn.cursor()
-        cur.execute(query, (theater_location, name, overall_rating, genre, activity_type_id))
+        cur.execute(query, (name, overall_rating, genre, activity_type_id))
         conn.commit()
 
         return jsonify({"message": "Movie created successfully.", "id": cur.lastrowid}), 201
