@@ -20,6 +20,7 @@ def get_user_info():
     the_response.mimetype = 'application/json'
     return the_response
 
+
 @user_blueprint.route('/user/<int:UserID>', methods=['DELETE'])
 def delete_user(UserID):
     cursor = db.get_db().cursor()
@@ -39,11 +40,12 @@ def delete_user(UserID):
         return jsonify({'error': 'Failed to delete user due to: {}'.format(str(e))}), 500
 
 
+
 #Get details for specific user by UserID
-@user_blueprint.route('/user/<UserID>', methods=['GET'])
-def get_user_by_id(UserID):
+@user_blueprint.route('/user/<Name>', methods=['GET'])
+def get_name_by_id(Name):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM User WHERE UserID = %s', (UserID,))
+    cursor.execute('SELECT * FROM User WHERE Name = %s', (Name,))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -53,6 +55,7 @@ def get_user_by_id(UserID):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
 
 @user_blueprint.route('/budget', methods=['PUT'])
 def update_user():
@@ -110,7 +113,6 @@ def update_user():
 #     db.get_db().commit()
 #     return 'User likes deleted.', 200
 
-#post new user
 @user_blueprint.route('/user', methods=['POST'])
 def create_user():
     data = request.get_json()
@@ -125,23 +127,23 @@ def create_user():
         Gender = data['Gender']
         DietaryRestrictions = data['DietaryRestrictions']
         SubscriptionPlan = data['SubscriptionPlan']
-        PaymentID = data['PaymentId']
+        PaymentID = data['PaymentID']
         Balance = data['Balance']
         PaymentMethod = data['PaymentMethod']
-
-        cursor = db.cursor()
 
         query = '''
             INSERT INTO User (Name, Age, Occupation, Hometown, Budget, Dislikes, Likes, Gender, DietaryRestrictions, SubscriptionPlan, PaymentID, Balance, PaymentMethod) 
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         '''
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute(query, (Name, Age, Occupation, Hometown, Budget, Dislikes, Likes, Gender, DietaryRestrictions, SubscriptionPlan, PaymentID, Balance, PaymentMethod))
+        conn.commit()
 
-        cursor.execute(query, (Name, Age, Occupation, Hometown, Budget, Dislikes, Likes, Gender, DietaryRestrictions, SubscriptionPlan, PaymentID, Balance, PaymentMethod))
-        db.commit()
-
-        return jsonify({"message": "User created successfully."}), 201
+        return jsonify({"message": "User created successfully.", "id": cur.lastrowid}), 201
 
     except KeyError as e:
         return jsonify({"error": f"Missing field: {e}"}), 400
     except Exception as e:
         return jsonify({"error": "An error occurred creating the user."}), 500
+

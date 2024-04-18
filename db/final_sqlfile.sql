@@ -3895,4 +3895,4 @@ insert into Transportation (TransportationID, Budget, CleanlinessSafety) values 
 insert into Transportation (TransportationID, Budget, CleanlinessSafety) values (200, 9.73, 'clean');
 
 
-SELECT * FROM Destination;
+SELECT * FROM User;
