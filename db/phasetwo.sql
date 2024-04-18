@@ -268,7 +268,7 @@ CREATE TABLE Movies (
     FOREIGN KEY (Activity_Type_ID) REFERENCES Activity(ActivityID)
 );
 
-CREATE TABLE MoviesLocation (
+CREATE TABLE Movies_Location (
     Location VARCHAR(255) PRIMARY KEY UNIQUE,
     MovieID INT,
     CONSTRAINT fk_28
@@ -277,7 +277,7 @@ CREATE TABLE MoviesLocation (
 );
 
 /* 6 */
-CREATE TABLE ArtsMuseums (
+CREATE TABLE ArtMuseums (
     ArtMuseumID INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
     Name TEXT,
     ArtType TEXT,
@@ -294,7 +294,7 @@ CREATE TABLE ArtMuseumsLocation (
     Location VARCHAR(255) PRIMARY KEY UNIQUE,
     ArtMuseumID INT,
     CONSTRAINT fk_27
-	    FOREIGN KEY (ArtMuseumID) REFERENCES ArtsMuseums(ArtMuseumID)
+	    FOREIGN KEY (ArtMuseumID) REFERENCES ArtMuseums(ArtMuseumID)
 	    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -351,8 +351,8 @@ insert into User (UserID, Age, Name,  Occupation, gender, Hometown, Dislikes, Li
 insert into User (UserID, Age, Name,  Occupation, gender, Hometown, Dislikes, Likes, DietaryRestrictions, PaymentID, Balance, PaymentMethod, Budget) values (33, 34, 'Johnette Bramich', 'unemployed', 'Female', '321 Birch Ave Orlando FL', 'sweet food', 'sweet food', 'gluten free', 33, 274, 'Debit Card', 75);
 insert into User (UserID, Age, Name,  Occupation, gender, Hometown, Dislikes, Likes, DietaryRestrictions, PaymentID, Balance, PaymentMethod, Budget) values (34, 13, 'Nowell Sange', 'data scientist', 'Male', '789 Pine Dr Boston MA', 'romance movies', 'loud areas', 'none', 34, 75, 'Venmo', 167);
 insert into User (UserID, Age, Name,  Occupation, gender, Hometown, Dislikes, Likes, DietaryRestrictions, PaymentID, Balance, PaymentMethod, Budget) values (35, 48, 'Vance Gawkroge', 'unemployed', 'Male', '789 Elm Dr Philadelphia PA', 'spicy food', 'sweet food', 'vegan', 35, 92, 'Paypal', 286);
-INSERT INTO User (Name, Age, Occupation, Hometown, Budget, Dislikes, Likes, Gender, DietaryRestrictions, SubscriptionPlan, PaymentID, Paid, Free, PaymentMethod)
-VALUES ('Timothee Chalamet', 28, 'Actor', 'Boston', 1500.00, 'Crowds, Loud music', 'Hiking, Reading, Singing, SNL', 'Male', 'None', 'Monthly', 1, 'Yes', 'No', 'Credit Card');
+INSERT INTO User (Name, Age, Occupation, Hometown, Budget, Dislikes, Likes, Gender, DietaryRestrictions, SubscriptionPlan, PaymentID,Balance, PaymentMethod)
+VALUES ('Timothee Chalamet', 28, 'Actor', 'Boston', 1500.00, 'Crowds, Loud music', 'Hiking, Reading, Singing, SNL', 'Male', 'None', 'Monthly', 1, 200, 'Credit Card');
 
 /* user location */
 insert into User_Location (Location, UserID) values ('789 Birch St Boston MA', '15');
@@ -3447,47 +3447,47 @@ insert into User_Des (Address, UserID) values (null, '11');
 insert into User_Des (Address, UserID) values (null, '2');
 insert into User_Des (Address, UserID) values (null, '18');
 
-/* MusicFestival */ 
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (1, 'Anette Byneth', 'Bluegrass', 49723, 'Rhythmic Vibes Festival Lowell MA 01853', 5, '$$', 'John Legend', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (2, 'Holden Dicken', 'Classical', 1815, 'Melody Meadows Music Fest Boston MA 02112', 1, '$$$', 'Christina Aguilera', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (3, 'Stevana Drust', 'House', 41147, 'Melody Meadows Music Fest Boston MA 02110', 3, '$$', 'Selena Gomez', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (4, 'Missie Langley', 'Techno', 43712, 'Soundwave Summit Salem MA 01970', 5, '$', 'Demi Lovato', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (5, 'Shaughn Yter', 'R&B', 62362, 'Rhythmic Vibes Festival Lowell MA 01851', 4, '$$$$$', 'Enrique Iglesias', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (6, 'Ludovico Briggdale', 'Disco', 68968, 'Soundwave Summit Salem MA 01971', 1, '$', 'Sam Smith', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (7, 'Waldon MacCafferty', 'Punk', 76189, 'Harmony Hills Music Fest Worcester MA 01604', 5, '$$$', 'Enrique Iglesias', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (8, 'Rozalin Epgrave', 'Trap', 14434, 'Rhythmic Vibes Festival Lowell MA 01853', 5, '$$$$$', 'Lady Gaga', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (9, 'Marsha Gornal', 'Reggaeton', 96118, 'Rhythmic Vibes Festival Lowell MA 01852', 4, '$', 'Sia', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (10, 'Arvie Lingard', 'Electronic', 26095, 'Rhythmic Vibes Festival Lowell MA 01854', 2, '$$$$$', 'Sam Smith', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (11, 'Lyon Handke', 'R&B', 17862, 'Soundwave Summit Salem MA 01974', 2, '$$', 'Harry Styles', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (12, 'Sasha Cusack', 'Rock', 94319, 'Harmony Haven Fest Quincy MA 02169', 5, '$', 'Ariana Grande', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (13, 'Linn Mariaud', 'Grunge', 33986, 'Soundwave Summit Salem MA 01972', 3, '$$$$$', 'Christina Aguilera', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (14, 'Emmott Le Bosse', 'Blues', 41131, 'Melody Meadows Music Fest Boston MA 02108', 4, '$$$$', 'Post Malone', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (15, 'Almeta Vallance', 'Metal', 52198, 'Groovefest at Greenfield Park Springfield MA 01107', 1, '$$$$', 'Maroon 5', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (16, 'Alla Hollow', 'Reggae', 42697, 'Groovefest at Greenfield Park Springfield MA 01103', 4, '$', 'Post Malone', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (17, 'Benedict Veivers', 'Pop', 13556, 'Echo Valley Music Festival Cambridge MA 02142', 4, '$$$$$', 'Charlie Puth', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (18, 'Janis Kitchin', 'Alternative', 88039, 'Serenade Summit Somerville MA 02144', 2, '$$$$$', 'John Legend', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (19, 'Celia Maggs', 'Trap', 44670, 'Groovefest at Greenfield Park Springfield MA 01103', 1, '$$$$$', 'Sam Smith', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (20, 'Laure Stoke', 'Flamenco', 43767, 'Groove Garden Festival Newton MA 02458', 3, '$$$$$', 'Miley Cyrus', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (21, 'Ailey Zecchini', 'Indie', 76314, 'Groove Garden Festival Newton MA 02458', 2, '$$', 'Halsey', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (22, 'Vincent Walthall', 'Hip hop', 63041, 'Beatbox Bash Brockton MA 02303', 1, '$$$', 'Beyoncé', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (23, 'Aguie Georgeot', 'Salsa', 23660, 'Rhythmic Vibes Festival Lowell MA 01851', 4, '$$', 'Kelly Clarkson', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (24, 'Georas Swepstone', 'Country', 72687, 'Beatbox Bash Brockton MA 02304', 4, '$$', 'Katy Perry', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (25, 'Raleigh Trevallion', 'Dance', 39930, 'Beatbox Bash Brockton MA 02302', 2, '$', 'Sam Smith', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (26, 'Silvanus Malzard', 'Reggae', 44643, 'Harmony Hills Music Fest Worcester MA 01605', 4, '$$$$$', 'Selena Gomez', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (27, 'Christiane Gambie', 'R&B', 58091, 'Rhythmic Vibes Festival Lowell MA 01851', 5, '$$', 'Ariana Grande', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (28, 'Matilde Dawdary', 'Latin', 91964, 'Harmony Hills Music Fest Worcester MA 01604', 3, '$$$$$', 'Jason Derulo', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (29, 'Ermengarde Caddock', 'Ambient', 75513, 'Echo Valley Music Festival Cambridge MA 02140', 4, '$', 'Usher', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (30, 'Gilles Hoffmann', 'Salsa', 35552, 'Echo Valley Music Festival Cambridge MA 02139', 2, '$$$$', 'Lana Del Rey', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (31, 'Gaye Mattiato', 'Pop', 42475, 'Serenade Summit Somerville MA 02143', 1, '$$', 'Ed Sheeran', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (32, 'Verene MacKenny', 'Salsa', 56747, 'Groove Garden Festival Newton MA 02459', 5, '$', 'Beyoncé', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (33, 'Corrie Druhan', 'Trap', 901, 'Harmony Haven Fest Quincy MA 02171', 3, '$$$$', 'Khalid', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (34, 'Shelba Brennon', 'Alternative', 52895, 'Beatbox Bash Brockton MA 02301', 4, '$', 'BTS', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (35, 'Violette Ferrierio', 'Salsa', 25326, 'Rhythmic Vibes Festival Lowell MA 01852', 3, '$$$$$', 'Bruno Mars', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (36, 'Burr Hugland', 'Disco', 55465, 'Echo Valley Music Festival Cambridge MA 02141', 5, '$$', 'Bruno Mars', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (37, 'Ianthe Samber', 'Bossa nova', 23795, 'Groove Garden Festival Newton MA 02458', 1, '$$$', 'Selena Gomez', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (38, 'Delilah McOwen', 'Alternative', 32692, 'Melody Meadows Music Fest Boston MA 02111', 3, '$', 'Kelly Clarkson', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (39, 'Russ Castagno', 'Punk', 13369, 'Rhythmic Vibes Festival Lowell MA 01854', 2, '$$$$', 'Rihanna', '2');
-insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, Location, OverallRating, PriceTag, Artists, ActivityTypeID) values (40, 'Colet Pell', 'Alternative', 96866, 'Beatbox Bash Brockton MA 02303', 1, '$', 'Lady Gaga', '2');
+/* MusicFestival */
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (1, 'Voodoo Music + Arts Experience', 'Gospel', 75641, 3, '$$$$', 'Demi Lovato', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (2, 'Voodoo Music + Arts Experience', 'Alternative', 14884, 3, '$$$$', 'Alicia Keys', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (3, 'Electric Daisy Carnival (EDC)', 'Funk', 69350, 1, '$', 'Usher', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (4, 'Fuji Rock Festival', 'Latin', 43974, 4, '$$$', 'Adele', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (5, 'Riot Fest', 'Rap', 99326, 2, '$$$$$', 'Rihanna', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (6, 'Lovebox Festival', 'Metal', 48350, 4, '$$', 'Ellie Goulding', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (7, 'Electric Daisy Carnival (EDC)', 'Reggae', 72362, 4, '$', 'Sam Smith', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (8, 'WayHome Music & Arts Festival', 'Hip hop', 19101, 3, '$$$$', 'Shawn Mendes', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (9, 'Electric Forest', 'Pop', 80814, 2, '$', 'Halsey', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (10, 'Lollapalooza', 'Pop', 55891, 5, '$$$$', 'Enrique Iglesias', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (11, 'Rock in Rio', 'Punk', 28309, 5, '$$$', 'Charlie Puth', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (12, 'WOMAD (World of Music', 'Hip hop', 44160, 2, '$$', 'Enrique Iglesias', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (13, 'Outside Lands', 'Trap', 45630, 2, '$', 'The Weeknd', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (14, 'Voodoo Music + Arts Experience', 'Gospel', 69592, 2, '$$', 'Khalid', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (15, 'Electric Daisy Carnival (EDC)', 'Salsa', 54757, 4, '$$$$$', 'Nicki Minaj', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (16, 'Voodoo Music + Arts Experience', 'Punk', 87097, 3, '$$$$', 'Christina Aguilera', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (17, 'WOMAD (World of Music', 'Reggaeton', 9591, 2, '$', 'Justin Bieber', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (18, 'Voodoo Music + Arts Experience', 'Gospel', 58706, 2, '$', 'Beyoncé', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (19, 'Wireless Festival', 'Electronic', 46028, 3, '$$$', 'Camila Cabello', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (20, 'Austin City Limits (ACL) Festival', 'Country', 80055, 2, '$', 'Beyoncé', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (21, 'Sonar Festival', 'Alternative', 89168, 2, '$$', 'Charlie Puth', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (22, 'Outside Lands', 'Gospel', 65806, 1, '$$', 'Sia', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (23, 'Ultra Music Festival', 'Latin', 84842, 5, '$$$$$', 'John Legend', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (24, 'Riot Fest', 'Punk', 88335, 3, '$', 'John Legend', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (25, 'Mawazine Festival', 'Dubstep', 92335, 1, '$$$$', 'Ellie Goulding', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (26, 'Glastonbury', 'Country', 75654, 2, '$', 'Nicki Minaj', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (27, 'Austin City Limits (ACL) Festival', 'Reggaeton', 68152, 1, '$$', 'Rihanna', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (28, 'Riot Fest', 'Trap', 5117, 2, '$$$', 'Beyoncé', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (29, 'The Great Escape', 'Hip hop', 65716, 4, '$$$', 'Lady Gaga', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (30, 'Primavera Fauna', 'Rock', 61660, 3, '$$$', 'Harry Styles', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (31, 'Sonar Festival', 'Soul', 47056, 4, '$$$$', 'Enrique Iglesias', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (32, 'Arts and Dance) Festival', 'Indie', 782, 5, '$$', 'Alicia Keys', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (33, 'Fuji Rock Festival', 'Bossa nova', 21734, 5, '$$$$$', 'Camila Cabello', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (34, 'Electric Daisy Carnival (EDC)', 'Bossa nova', 25609, 4, '$$$$', 'Adele', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (35, 'Panorama Music Festival', 'Classical', 52794, 1, '$$$$', 'Maroon 5', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (36, 'Glastonbury', 'Blues', 49633, 1, '$$$', 'Ed Sheeran', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (37, 'Tomorrowland', 'R&B', 84212, 4, '$$$', 'Nicki Minaj', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (38, 'Austin City Limits (ACL) Festival', 'Country', 15371, 5, '$', 'Christina Aguilera', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (39, 'Outside Lands', 'Bluegrass', 58692, 2, '$', 'Post Malone', '2');
+insert into MusicFestivals (FestivalID, Name, MusicType, CrowdSize, OverallRating, PriceTag, Artists, ActivityTypeID) values (40, 'Fun Lands', 'Greens', 6675, 2, '$$', 'Drake', 1);
 
 /* Music Artists */
 insert into Music_Festivals_Artists (FestivalID, Artists) values ('5', 'Halsey');
