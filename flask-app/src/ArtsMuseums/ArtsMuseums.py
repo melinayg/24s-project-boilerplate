@@ -33,7 +33,7 @@ def update_art():
 @art_blueprint.route('/art', methods=['GET'])
 def get_art_info():
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM ArtsMuseums')
+    cursor.execute('SELECT * FROM ArtMuseums')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -100,7 +100,7 @@ def delete_user(ArtMuseumID):
 @art_blueprint.route('/art/<art_type>', methods=['GET'])
 def get_arts_museums_by_art_type(art_type):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM ArtsMuseums WHERE ArtType = %s', (art_type,))
+    cursor.execute('SELECT * FROM ArtMuseums WHERE ArtType = %s', (art_type,))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()

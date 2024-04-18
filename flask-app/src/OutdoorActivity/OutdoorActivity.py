@@ -19,11 +19,10 @@ def update_outdoor():
     danger = info['Danger_level']
     exp = info['Experience']
     price = info['PriceTag']
-    location = info['Location']
     activity = info['ActivityTypeID']
 
-    query = 'UPDATE outdoor SET Name = %s, Difficulty_level = %s, Danger_level = %s, Experience = %s, PriceTag= %s, Location = %s, ActivityTypeID = %s where OutdoorID = %s'
-    data = (name, difficulty, danger, exp, price,location, activity, id)
+    query = 'UPDATE outdoor SET Name = %s, Difficulty_level = %s, Danger_level = %s, Experience = %s, PriceTag= %s, ActivityTypeID = %s where OutdoorID = %s'
+    data = (name, difficulty, danger, exp, price, activity, id)
     cursor = db.get_db().cursor()
     x = cursor.execute(query, data)
     db.get_db().commit()
@@ -34,7 +33,7 @@ def update_outdoor():
 def get_outdoors():
     cursor = db.get_db().cursor()
     cursor.execute('select OutdoorID, Name, Difficulty_level, Danger_level,\
-        Experience, PriceTag, Location, ActivityTypeID from Outdoor_Activity')
+        Experience, PriceTag, ActivityTypeID from Outdoor_Activity')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()

@@ -20,6 +20,25 @@ def get_user_info():
     the_response.mimetype = 'application/json'
     return the_response
 
+@user_blueprint.route('/user/<int:UserID>', methods=['DELETE'])
+def delete_user(UserID):
+    cursor = db.get_db().cursor()
+    try:
+        # Execute the DELETE statement
+        cursor.execute('DELETE FROM User WHERE UserID = %s', (UserID,))
+        db.get_db().commit()
+
+        # Check if the delete was successful
+        if cursor.rowcount == 0:
+            return jsonify({'error': 'No user found with that ID'}), 404
+
+        return jsonify({'message': 'User deleted successfully'}), 200
+
+    except Exception as e:
+        db.get_db().rollback()  # Rollback transaction if any error occurs
+        return jsonify({'error': 'Failed to delete user due to: {}'.format(str(e))}), 500
+
+
 #Get details for specific user by UserID
 @user_blueprint.route('/user/<UserID>', methods=['GET'])
 def get_user_by_id(UserID):
@@ -75,21 +94,21 @@ def update_user():
     db.get_db().commit()
     return jsonify({'message': 'User info is now updated.'})
 
-# Delete user's budget from DB by UserID
-@user_blueprint.route('/user/<Name>', methods=['DELETE'])
-def delete_user_budget(Name):
-    cursor = db.get_db().cursor()
-    cursor.execute('UPDATE User SET Budget = NULL WHERE Name = %s', (Name,))
-    db.get_db().commit()
-    return 'User budget deleted.', 200
+# # Delete user's budget from DB by UserID
+# @user_blueprint.route('/user/<Name>', methods=['DELETE'])
+# def delete_user_budget(Name):
+#     cursor = db.get_db().cursor()
+#     cursor.execute('UPDATE User SET Budget = NULL WHERE Name = %s', (Name,))
+#     db.get_db().commit()
+#     return 'User budget deleted.', 200
 
-# Delete user's likes from DB by UserID
-@user_blueprint.route('/user/<int:UserID>/likes', methods=['DELETE'])
-def delete_user_likes(UserID):
-    cursor = db.get_db().cursor()
-    cursor.execute('UPDATE User SET Likes = NULL WHERE UserID = %s', (UserID,))
-    db.get_db().commit()
-    return 'User likes deleted.', 200
+# # Delete user's likes from DB by UserID
+# @user_blueprint.route('/user/<int:UserID>/likes', methods=['DELETE'])
+# def delete_user_likes(UserID):
+#     cursor = db.get_db().cursor()
+#     cursor.execute('UPDATE User SET Likes = NULL WHERE UserID = %s', (UserID,))
+#     db.get_db().commit()
+#     return 'User likes deleted.', 200
 
 #post new user
 @user_blueprint.route('/user', methods=['POST'])

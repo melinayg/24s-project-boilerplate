@@ -71,32 +71,59 @@ def delete_cafe_rating(cafe_id):
     except Exception as e:
         return jsonify({"error": "An error occurred deleting the cafe rating."}), 500
 
-# posts cafe
+# # posts cafe
+# @cafes_blueprint.route('/cafes', methods=['POST'])
+# def create_cafe():
+#     data = request.get_json()
+#     try:
+#         id = data['CafeID']
+#         Cuisine = data['Cuisine']
+#         name = data["Name"]
+#         OverallRating = data['OverallRating']
+#         ActivityTypeID = data['ActivityTypeID']
+#         Price_Tag = data["Price_Tag"]
+
+#         query = '''
+#             INSERT INTO Cafes (CafeID, Name, PriceTag, Cuisine, ActivityTypeID, OverallRating) 
+#             VALUES (%s, %s, %s, %s, %s, %s)
+#         '''
+#         conn = db.get_db()
+#         cur = conn.cursor()
+#         cur.execute(query, (id, name, Price_Tag, Cuisine, ActivityTypeID, OverallRating))
+#         conn.commit()
+
+#         return jsonify({"message": "Cafe created successfully.", "id": cur.lastrowid}), 201
+#     except KeyError as e:
+#         return jsonify({"error": f"Missing required field: {str(e)}"}), 400
+#     except Exception as e:
+#         return jsonify({"error": "An error occurred while creating the cafe."}), 500
+    
+
 @cafes_blueprint.route('/cafes', methods=['POST'])
 def create_cafe():
     data = request.get_json()
     try:
-        id = data['CafeID']
-        Cuisine = data['Cuisine']
-        name = data["Name"]
-        OverallRating = data['OverallRating']
-        ActivityTypeID = data['ActivityTypeID']
-        Price_Tag = data["Price_Tag"]
+        name = data['Name']
+        cuisine = data['Cuisine']
+        overall_rating = data['OverallRating']
+        activity_type_id = data['ActivityTypeID']
+        price_tag = data['PriceTag']
 
         query = '''
-            INSERT INTO Cafes (CafeID, Name, PriceTag, Cuisine, ActivityTypeID, OverallRating) 
-            VALUES (%s, %s, %s, %s, %s, %s)
+            INSERT INTO Cafes (Name, Cuisine, OverallRating, ActivityTypeID, PriceTag) 
+            VALUES (%s, %s, %s, %s, %s)
         '''
         conn = db.get_db()
         cur = conn.cursor()
-        cur.execute(query, (id, name, Price_Tag, Cuisine, ActivityTypeID, OverallRating))
+        cur.execute(query, (name, cuisine, overall_rating, activity_type_id, price_tag))
         conn.commit()
 
         return jsonify({"message": "Cafe created successfully.", "id": cur.lastrowid}), 201
     except KeyError as e:
-        return jsonify({"error": f"Missing required field: {str(e)}"}), 400
+        return jsonify({"error": f"Missing field: {e}"}), 400
     except Exception as e:
-        return jsonify({"error": "An error occurred while creating the cafe."}), 500
+        return jsonify({"error": "An error occurred creating the cafe."}), 500
+
 
 # Retrieve by cuisine
 @cafes_blueprint.route('/cafes/cuisine/<cuisine>', methods=['GET'])
