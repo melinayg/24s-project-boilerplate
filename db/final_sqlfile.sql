@@ -14,7 +14,7 @@ CREATE TABLE User (
     DietaryRestrictions TEXT,
     SubscriptionPlan TEXT,
     PaymentID INT,
-    Balance INT, 
+    Balance INT,
     PaymentMethod TEXT
 );
 
@@ -151,7 +151,7 @@ CREATE TABLE Destination_to_Transportation (
 	    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-/* 3 */ 
+/* 3 */
 CREATE TABLE Restaurants(
 	RestaurantID INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
 	Name TEXT,
@@ -193,7 +193,7 @@ CREATE TABLE Cafe_Location (
 	    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-/* 2 */ 
+/* 2 */
 CREATE TABLE MusicFestivals(
 	FestivalID INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
 	Name TEXT,
@@ -351,7 +351,6 @@ insert into User (UserID, Age, Name,  Occupation, gender, Hometown, Dislikes, Li
 insert into User (UserID, Age, Name,  Occupation, gender, Hometown, Dislikes, Likes, DietaryRestrictions, PaymentID, Balance, PaymentMethod, Budget) values (33, 34, 'Johnette Bramich', 'unemployed', 'Female', '321 Birch Ave Orlando FL', 'sweet food', 'sweet food', 'gluten free', 33, 274, 'Debit Card', 75);
 insert into User (UserID, Age, Name,  Occupation, gender, Hometown, Dislikes, Likes, DietaryRestrictions, PaymentID, Balance, PaymentMethod, Budget) values (34, 13, 'Nowell Sange', 'data scientist', 'Male', '789 Pine Dr Boston MA', 'romance movies', 'loud areas', 'none', 34, 75, 'Venmo', 167);
 insert into User (UserID, Age, Name,  Occupation, gender, Hometown, Dislikes, Likes, DietaryRestrictions, PaymentID, Balance, PaymentMethod, Budget) values (35, 48, 'Vance Gawkroge', 'unemployed', 'Male', '789 Elm Dr Philadelphia PA', 'spicy food', 'sweet food', 'vegan', 35, 92, 'Paypal', 286);
-insert into User (UserID, Age, Name,  Occupation, gender, Hometown, Dislikes, Likes, DietaryRestrictions, PaymentID, Balance, PaymentMethod, Budget) values (35, 48, 'testing vscode', 'unemployed', 'Male', '789 Elm Dr Philadelphia PA', 'spicy food', 'sweet food', 'vegan', 35, 92, 'Paypal', 286);
 INSERT INTO User (Name, Age, Occupation, Hometown, Budget, Dislikes, Likes, Gender, DietaryRestrictions, SubscriptionPlan, PaymentID,Balance, PaymentMethod)
 VALUES ('Timothee Chalamet', 28, 'Actor', 'Boston', 1500.00, 'Crowds, Loud music', 'Hiking, Reading, Singing, SNL', 'Male', 'None', 'Monthly', 1, 200, 'Credit Card');
 
