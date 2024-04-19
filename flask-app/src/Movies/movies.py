@@ -3,7 +3,6 @@ from src import db
 
 movies_blueprint = Blueprint('movies', __name__)
 
-# Create a new movie
 @movies_blueprint.route('/movies', methods=['POST'])
 def create_movie():
     data = request.get_json()
@@ -11,11 +10,11 @@ def create_movie():
         name = data['Name']
         overall_rating = data['OverallRating']
         genre = data['Genre']
-        activity_type_id = data['Activity_Type_ID']
+        activity_type_id = data['ActivityTypeID']
 
         query = '''
             INSERT INTO Movies (Name, OverallRating, Genre, Activity_Type_ID) 
-            VALUES (%s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s)
         '''
         conn = db.get_db()
         cur = conn.cursor()
