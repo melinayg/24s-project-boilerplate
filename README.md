@@ -3,7 +3,7 @@ Our project, GoGoMass, aims to develop a comprehensive database to capture the e
 
 Group Members: Melina Yang, Nafisa Tasnia, Ala’a Tamam, Saariya Faraz, Rhoda Zerit
 
-
+**VIDEO LINK**: https://drive.google.com/file/d/1jb_6aBURkeqc6criCuctnCankIZg1yut/view?usp=sharing
 
 
 
